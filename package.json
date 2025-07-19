@@ -2,9 +2,10 @@
   "name": "projeto-agenda",
   "version": "1.0.0",
   "main": "routes.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js --ignore public --ignore frontend",
+    "start": "nodemon server.js --ignore public --ignore frontend",
     "dev": "webpack -w"
   },
   "repository": {
@@ -29,6 +30,7 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
+    "bootstrap": "^5.3.7",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.7",
     "core-js": "^3.44.0",
