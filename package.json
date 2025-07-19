@@ -4,7 +4,7 @@
   "main": "routes.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "node server.js --ignore public --ignore frontend",
     "dev": "webpack -w"
   },
   "repository": {
@@ -20,10 +20,10 @@
   "homepage": "https://github.com/lucascorreia-tech/Projeto-Agenda#readme",
   "description": "",
   "devDependencies": {
+    "@babel/cli": "^7.28.0",
     "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
     "babel-loader": "^10.0.0",
-    "ejs": "^3.1.10",
     "nodemon": "^3.1.10",
     "webpack": "^5.100.2",
     "webpack-cli": "^6.0.1"
@@ -34,6 +34,8 @@
     "core-js": "^3.44.0",
     "csrf-sync": "^4.2.1",
     "css-loader": "^7.1.2",
+    "dotenv": "^17.2.0",
+    "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "helmet": "^8.1.0",

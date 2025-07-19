@@ -35,13 +35,5 @@ export default {
     ]
   },
 
-  resolve: {
-    extensions: ['.js']
-  },
-
-  watchOptions: {
-    ignored: /node_modules/
-  },
-
   devtool: 'source-map'
 };
