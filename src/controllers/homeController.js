@@ -1,9 +1,9 @@
-function paginaInicial (req,res) {
+function index (req,res) {
   res.render('index', {
     titulo: 'Página Inical'
   });
 }
 
 export default{
-  paginaInicial
+  index
 };
