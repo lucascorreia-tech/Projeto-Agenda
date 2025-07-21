@@ -1,10 +1,7 @@
 import Login from '../models/LoginModel.js';
 
 function index (req, res) {
-  res.render('login', {
-    erros: req.flash('erros'),
-    sucesso: req.flash('sucesso')
-  });
+  res.render('login');
 };
 
 async function register(req,res) {
@@ -15,14 +12,14 @@ async function register(req,res) {
     if(login.erros.length > 0){
       req.flash('erros', login.erros);
       req.session.save(function(){
-        return res.redirect('login');  
+        return res.redirect('/login/index');  
       });
       return;
     }
 
     req.flash('sucesso', 'Sua conta foi criada com sucesso.');
     req.session.save(function(){
-      return res.redirect('login');  
+      return res.redirect('/login/index');  
     });
   }catch(e){
     console.log(e);
