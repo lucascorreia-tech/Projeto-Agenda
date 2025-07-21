@@ -8,6 +8,7 @@ routes.get('/', homeController.index);
 
 // Rotas de Login
 routes.get('/login/index', loginController.index);
+routes.post('/login/register', loginController.register);
 
 
 export default routes;
