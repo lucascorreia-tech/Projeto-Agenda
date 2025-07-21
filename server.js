@@ -28,10 +28,7 @@ const __dirname = dirname(__filename);
 async function main() {
   try{
     // Conexão com MongoDB Atlas
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    await mongoose.connect(process.env.MONGO_URI);
     console.log('MongoDB Conectado !!!');
 
     // Middlewares de parsing
