@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
+import bcrypt from "bcryptjs";
 
 // Como vai ficar no Banco de dados
 const LoginSchema = new mongoose.Schema({
@@ -20,11 +21,23 @@ class Login {
     this.#valida();
     if(this.erros.length > 0) return;
 
+    await this.#userExists();
+
+    if(this.erros.length > 0) return;
+    // Hash da senha (Para segurança)
+    const salt = bcrypt.genSaltSync();
+    this.body.password = bcrypt.hashSync(this.body.password, salt);
+
     try{
        this.user = await LoginModel.create(this.body);
     } catch(e){
       console.log(e);
     }
+  }
+
+  async #userExists(){
+    const user = await LoginModel.findOne({ email: this.body.email});
+    if(user) this.erros.push('O usuário já existe !!!');
   }
 
   #valida(){
