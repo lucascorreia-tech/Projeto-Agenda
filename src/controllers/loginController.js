@@ -18,7 +18,18 @@ async function register(req,res) {
       return;
     }
 
+    await login.logar();
+
+    if (login.erros.lenght > 0){
+      req.flash('erros', login.erros);
+      req.session.save(function(){
+        return res.redirect('/login/index');
+      })
+      return;
+    }
+
     req.flash('sucesso', 'Sua conta foi criada com sucesso.');
+    req.session.user = login.user;
     req.session.save(function(){
       return res.redirect('/login/index');  
     });
