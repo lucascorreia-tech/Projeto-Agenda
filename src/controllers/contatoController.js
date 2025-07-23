@@ -53,11 +53,24 @@ async function edit(req,res){
     console.log(e);
     res.render('404');
   }
+};
+
+async function deletar(req,res) {
+  if(!req.params.id) return res.render('404');
+
+  const contato = await Contato.delete(req.params.id);
+  if(!contato) return res.render('404');
+
+
+  req.flash('sucesso', 'Contato excluido com sucesso !');
+  req.session.save(() => res.redirect('/'));
+  return;
 }
 
 export default{
   index,
   register,
   editIndex,
-  edit
+  edit,
+  deletar
 };

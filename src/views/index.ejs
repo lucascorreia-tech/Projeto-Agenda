@@ -12,30 +12,16 @@
       <%- include('includes/messagens') %>
       <div class="responsive-table">
         <table class="table">
-          <tr>
-            <td>Lucas</td>
-            <td>Correia</td>
-            <td>1232131241241213</td>
-            <td>email@gmail.com</td>
-          </tr>
-          <tr>
-            <td>Lucas</td>
-            <td>Correia</td>
-            <td>1232131241241213</td>
-            <td>email@gmail.com</td>
-          </tr>
-          <tr>
-            <td>Lucas</td>
-            <td>Correia</td>
-            <td>1232131241241213</td>
-            <td>email@gmail.com</td>
-          </tr>
-          <tr>
-            <td>Lucas</td>
-            <td>Correia</td>
-            <td>1232131241241213</td>
-            <td>email@gmail.com</td>
-          </tr>
+          <% contatos.forEach(contato => { %>
+            <tr>
+              <td><%= contato.nome %></td>
+              <td><%= contato.sobrenome %></td>
+              <td><%= contato.email %></td>
+              <td><%= contato.telefone %></td>
+              <td><a href="/contato/index/<%= contato._id %>">Editar</a></td>
+              <td><a class="text-danger" href="/contato/delete/<%= contato._id %>">Exlucir</a></td>
+            </tr>
+          <% }); %>
         </table>
       </div>
     </div>
