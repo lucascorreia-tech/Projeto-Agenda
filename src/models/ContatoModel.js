@@ -19,8 +19,8 @@ function Contato(body){
 
 Contato.buscaPorId = async function(id){
   if(typeof id !== 'string') return;
-  const user = await ContatoModel.findById(id);
-  return user;
+  const contato = await ContatoModel.findById(id);
+  return contato;
 };
 
 Contato.prototype.register = async function(){
@@ -31,26 +31,34 @@ Contato.prototype.register = async function(){
 
 Contato.prototype.valida = function(){
   this.cleanUp();
+
   if(this.body.email && !validator.isEmail(this.body.email)) this.erros.push('Email inválido');
-  if(!this.body.nome) this.erros.push('Nome é um campo obrigatório');
+  if(!this.body.nome || !this.body.nome.trim()) this.erros.push('Nome é um campo obrigatório');
   if(!this.body.email && !this.body.telefone) {
     this.erros.push('Pelo menos um contato precisa ser enviado: e-mail ou telefone');
-  };
+  }
 }
 
 Contato.prototype.cleanUp = function(){
   for(const key in this.body){
     if (typeof this.body[key] !== 'string') {
       this.body[key] = '';
-    };
+    }
   }
 
   this.body = {
-    nome: this.body.nome,
-    sobrenome: this.body.sobrenome,
-    email: this.body.email,
-    telefone: this.body.telefone
+    nome: this.body.nome || '',
+    sobrenome: this.body.sobrenome || '',
+    email: this.body.email || '',
+    telefone: this.body.telefone || ''
   }
+};
+
+Contato.prototype.edit = async function (id) {
+  if(typeof id !== 'string') return;
+  this.valida();
+  if(this.erros.length > 0) return;
+  this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, {new: true});
 }
 
 export default Contato;

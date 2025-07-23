@@ -26,7 +26,7 @@ async function register(req,res){
   }
 };
 
-async function edit(req,res){
+async function editIndex(req,res){
   if(!req.params.id) return res.render('404');
 
   const contato = await Contato.buscaPorId(req.params.id);
@@ -34,8 +34,30 @@ async function edit(req,res){
   res.render('contato', {contato});
 }
 
+async function edit(req,res){
+  try {
+    if(!req.params.id) return res.render('404');
+    const contato = new Contato(req.body);
+    await contato.edit(req.params.id);
+
+    if(contato.erros.length > 0){
+      req.flash('erros', contato.erros);
+      req.session.save(() => res.redirect('/contato/index'));
+      return;
+    }
+
+    req.flash('sucesso', 'Contato editado com sucesso !!');
+    req.session.save(() => res.redirect(`/contato/index/${contato.contato._id}`));
+    return;
+  } catch(e){
+    console.log(e);
+    res.render('404');
+  }
+}
+
 export default{
   index,
   register,
+  editIndex,
   edit
 };
