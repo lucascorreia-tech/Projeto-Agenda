@@ -63,12 +63,11 @@ async function main() {
     // Middlewares globais
     app.use(middlewareGlobal);
     app.use(csrfMiddleware);
+    app.use(checkCsrfError); 
 
     // Configura rotas
     app.use(routes);
-
-    // Tratamento de erro CSRF
-    app.use(checkCsrfError); 
+    
 
     app.listen(PORT, ()=> {
       console.log(`Acessar http://localhost:${PORT}`);
